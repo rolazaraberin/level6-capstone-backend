@@ -17,14 +17,14 @@ function getWebpackOptions(env, args) {
   return {
     entry: getEntryOptions(env, args),
     externals: getExternals(env),
-    devServer: getDevServerOptions(),
+    devServer: getDevServerOptions(env),
     devtool: getDevtoolOptions(),
     mode: getModeOptions(env, args),
     module: getModuleOptions(),
     output: getOutputOptions(env, args),
     plugins: getPluginsOptions(env),
     resolve: getResolveOptions(),
-    target: getTargetOptions(),
+    target: getTargetOptions(env),
   };
 }
 
@@ -43,10 +43,11 @@ function getEntryOptions(env, args) {
 }
 function getExternals(env) {
   const externals = [];
-  if (process.env.webpack === "backend") externals.push(nodeExternals());
+  // if (process.env.webpack === "backend") externals.push(nodeExternals());
+  if (env.nodeExternals) externals.push(nodeExternals());
   return externals;
 }
-function getDevServerOptions() {
+function getDevServerOptions(env) {
   //INFO - https://www.robinwieruch.de/webpack-react-router/
   //INFO - https://webpack.js.org/configuration/dev-server/#devserverhistoryapifallback
 
@@ -241,8 +242,9 @@ function getResolveOptions() {
   };
   return resolveOptions;
 }
-function getTargetOptions() {
+function getTargetOptions(env) {
   let target = "web";
-  if (process.env.webpack === "backend") target = "node";
+  // if (process.env.webpack === "backend") target = "node";
+  if (env.nodeExternals) target = "node";
   return target;
 }
