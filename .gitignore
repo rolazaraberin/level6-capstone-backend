@@ -1,0 +1,24 @@
+#IGNORE ALL
+**
+
+#DON'T IGNORE BUILDS
+!public
+!public/**
+!**/public/**
+!build
+!build/**
+!**/build/**
+!dist
+!dist/**
+!**/dist/**
+
+#DON'T IGNORE CONFIG FILES
+!package.json
+!package-lock.json
+!babel.config.*
+!webpack.config.*
+!jest.config.*
+!.gitignore
+!.github
+!.github/**
+!**/.github/**
