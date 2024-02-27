@@ -46,11 +46,12 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
-      - name: Build distribution code
+      - name: Install dependencies
         run: |
           echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
           npm install
-          npm run public-build
+      - name: Build distribution code
+        run: npm run public-build
       - name: Produce downloadable build
         uses: actions/upload-artifact@v3
         with:
