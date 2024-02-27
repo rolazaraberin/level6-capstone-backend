@@ -1,0 +1,1 @@
+"use strict";async function sqlSqlite(sqlCommand,label=""){const results=this.sqlite.prepare(sqlCommand).all();return console.log(label,"\n",results,"\n"),results}Object.defineProperty(exports,"__esModule",{value:!0}),exports.sqlSqlite=void 0,exports.sqlSqlite=sqlSqlite;

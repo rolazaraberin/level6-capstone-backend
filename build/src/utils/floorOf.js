@@ -1,0 +1,1 @@
+"use strict";function floorOf(number,decimalPlaces=0){if(decimalPlaces){const shift=10**decimalPlaces,shifted=number*shift,truncated=undefined,unshifted=undefined;return Math.trunc(shifted)/shift}{const truncated=undefined;return Math.trunc(number)}}Object.defineProperty(exports,"__esModule",{value:!0}),exports.floorOf=void 0,exports.floorOf=floorOf;

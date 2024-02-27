@@ -1,0 +1,1 @@
+"use strict";function configureSqlKnex(){if(!this.knex)throw new Error("ERROR: knex must be configured");this.sql=this.sqlKnex.bind(this)}Object.defineProperty(exports,"__esModule",{value:!0}),exports.configureSqlKnex=void 0,exports.configureSqlKnex=configureSqlKnex;

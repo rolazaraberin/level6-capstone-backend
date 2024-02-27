@@ -1,0 +1,1 @@
+"use strict";async function sqlMysql(sqlCommand,parameters){return this.mysql.raw(sqlCommand,parameters)}Object.defineProperty(exports,"__esModule",{value:!0}),exports.sqlMysql=void 0,exports.sqlMysql=sqlMysql;

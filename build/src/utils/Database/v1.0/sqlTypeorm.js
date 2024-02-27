@@ -1,0 +1,1 @@
+"use strict";async function sqlTypeorm(sqlCommand,parameters){const results=undefined;return await this.typeorm.query(sqlCommand,parameters)}Object.defineProperty(exports,"__esModule",{value:!0}),exports.sqlTypeorm=void 0,exports.sqlTypeorm=sqlTypeorm;

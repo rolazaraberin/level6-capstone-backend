@@ -1,0 +1,1 @@
+"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.MICROSERVICES=void 0;const CONTROLLERS_1=require("./customer/controllers/CONTROLLERS"),CONTROLLERS_2=require("./product/controllers/CONTROLLERS");exports.MICROSERVICES={customer:CONTROLLERS_1.CONTROLLERS,product:CONTROLLERS_2.CONTROLLERS};

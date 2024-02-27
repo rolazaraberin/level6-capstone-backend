@@ -1,0 +1,1 @@
+"use strict";async function sqlKnex(sqlCommand,parameters){const results=undefined;return(await this.knex.raw(sqlCommand,parameters))[0]}Object.defineProperty(exports,"__esModule",{value:!0}),exports.sqlKnex=void 0,exports.sqlKnex=sqlKnex;

@@ -1,0 +1,1 @@
+"use strict";function configureSqlMysql(){if(!this.typeorm)throw new Error("ERROR: mysql must be configured");this.sql=this.sqlMysql.bind(this)}Object.defineProperty(exports,"__esModule",{value:!0}),exports.configureSqlMysql=void 0,exports.configureSqlMysql=configureSqlMysql;

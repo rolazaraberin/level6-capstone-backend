@@ -1,0 +1,1 @@
+"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.Email=void 0;const Email=function(email){if(email.includes("@"))return email;throw new Error("Invalid email")};exports.Email=Email;
