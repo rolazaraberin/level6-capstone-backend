@@ -18,7 +18,7 @@ function getWebpackOptions(env, args) {
     entry: getEntryOptions(env, args),
     externals: getExternals(env),
     devServer: getDevServerOptions(env),
-    devtool: getDevtoolOptions(),
+    devtool: getDevtoolOptions(env),
     mode: getModeOptions(env, args),
     module: getModuleOptions(),
     output: getOutputOptions(env, args),
@@ -80,13 +80,15 @@ function getDevServerOptions(env) {
   if (process.env.webpack === "backend") devServerOptions.port = 8000;
   return devServerOptions;
 }
-function getDevtoolOptions() {
+function getDevtoolOptions(env) {
   //ORIGINAL LINES - https://webpack.js.org/configuration/devtool/#devtool
+
+  const devtoolOptions = undefined;
+  if (env.WEBPACK_SERVE) devtoolOptions = "inline-source-map";
 
   // const devtoolOptions = "eval-source-map";
   // const devtoolOptions = "eval-cheap-module-source-map";
   // const devtoolOptions = "eval-nosources-source-map";
-  const devtoolOptions = "inline-source-map";
   // const devtoolOptions = "source-map";
   // const devtoolOptions = "hidden-source-map";
   return devtoolOptions;
