@@ -13,10 +13,10 @@ dotenv.config();
 module.exports = getWebpackOptions;
 
 function getWebpackOptions(env, args) {
-  // console.log("ARGV: ", _args);
   return {
     entry: getEntryOptions(env, args),
-    externals: getExternals(env),
+    // externals: getExternals(env),
+    externalsPresets: getExternalsPresets(env),
     devServer: getDevServerOptions(env),
     devtool: getDevtoolOptions(env),
     mode: getModeOptions(env, args),
@@ -38,14 +38,56 @@ function getEntryOptions(env, args) {
   //   entryOptions.index = "./build/src/index.js";
   // if (args.mode) entryOptions.index = "./src/index.js";
   if (env.WEBPACK_SERVE) entryOptions.index = "./src/index.js";
-
+  console.log("ENTRY: ", entryOptions.index);
   return entryOptions;
 }
 function getExternals(env) {
+  //DO NOT BUNDLE ANY NODE MODULES
+  //GOOD FOR BACKEND SERVER
+  //INFO - https://www.npmjs.com/package/webpack-node-externals
+
   const externals = [];
   // if (process.env.webpack === "backend") externals.push(nodeExternals());
-  if (env.nodeExternals) externals.push(nodeExternals());
+  if (env.excludeModules) externals.push(nodeExternals());
+  else if (env.excludeNode || env.serverless)
+    externals.push(
+      nodeExternals({
+        allowlist: ["express", "serverless-http"],
+      })
+    );
+  // else if (env.excludeNode || env.serverless)
+  //   externals.push(
+  //     nodeExternals({
+  //       modulesFromFiles: {
+  //         fileName: "package.json",
+  //         includeInBundle: ["dependencies"],
+  //         excludeFromBundle: ["devDependencies"],
+  //       },
+  //     })
+  //   );
+  console.log(
+    "EXCLUDE MODULES: ",
+    env.excludeModules || !env.excludeNode || !env.serverless
+  );
+  console.log("EXCLUDE NODE: ", env.excludeNode || env.serverless);
   return externals;
+}
+function getExternalsPresets(env) {
+  //DO NOT BUNDLE NODE CORE MODULES, BUT BUNDLE OTHER MODULES
+  //GOOD FOR LAMBDA
+  //INFO - https://webpack.js.org/configuration/externals/#externalspresets
+
+  const externalsPresets = {};
+  if (env.excludeModules || env.excludeNode || env.serverless)
+    externalsPresets.node = true;
+  else if (env.includeNode) externalsPresets.node = false;
+
+  console.log("INCLUDE MODULES: ", env.excludeNode || env.serverless);
+  console.log(
+    "INCLUDE NODE: ",
+    env.includeNode || env.serverless ? false : true
+  );
+  return externalsPresets;
 }
 function getDevServerOptions(env) {
   //INFO - https://www.robinwieruch.de/webpack-react-router/
@@ -83,14 +125,15 @@ function getDevServerOptions(env) {
 function getDevtoolOptions(env) {
   //ORIGINAL LINES - https://webpack.js.org/configuration/devtool/#devtool
 
-  const devtoolOptions = undefined;
-  if (env.WEBPACK_SERVE) devtoolOptions = "inline-source-map";
-
+  let devtoolOptions = undefined;
+  if (env.WEBPACK_SERVE) devtoolOptions = "source-map";
+  // if (env.WEBPACK_SERVE) devtoolOptions = "inline-source-map";
   // const devtoolOptions = "eval-source-map";
   // const devtoolOptions = "eval-cheap-module-source-map";
   // const devtoolOptions = "eval-nosources-source-map";
   // const devtoolOptions = "source-map";
   // const devtoolOptions = "hidden-source-map";
+  console.log("SOURCEMAP: ", devtoolOptions);
   return devtoolOptions;
 }
 function getModeOptions(env, args) {
@@ -99,6 +142,7 @@ function getModeOptions(env, args) {
   if (env.WEBPACK_SERVE) modeOptions = "development";
   if (process.env.NODE_ENV) modeOptions = process.env.NODE_ENV;
   if (args.mode) modeOptions = args.mode;
+  console.log("MODE: ", modeOptions);
   return modeOptions;
 }
 function getModuleOptions() {
@@ -200,6 +244,10 @@ function getOutputOptions(env, _args) {
   };
 
   if (env.cacheBuster) outputOptions.filename = "[name]-[hash].js"; //USE CACHE-BUSTER FILENAMES
+
+  //INFO - https://thecodebarbarian.com/bundling-a-node-js-function-for-aws-lambda-with-webpack.html
+  if (env.serverless) outputOptions.libraryTarget = "umd";
+
   //OVERWRITE OUTPUT OPTIONS FOR BACKEND
   // if (process.env.webpack === "backend")
   //   outputOptions.path = path.resolve(__dirname, "./dist");
@@ -247,6 +295,7 @@ function getResolveOptions() {
 function getTargetOptions(env) {
   let target = "web";
   // if (process.env.webpack === "backend") target = "node";
-  if (env.nodeExternals) target = "node";
+  if (env.excludeNode || env.excludeModules || env.serverless) target = "node";
+  console.log("TARGET: ", target);
   return target;
 }
