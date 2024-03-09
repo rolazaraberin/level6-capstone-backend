@@ -3,6 +3,7 @@ const nodeExternals = require("webpack-node-externals");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const Dotenv = require("dotenv-webpack");
+const { IgnorePlugin } = require("webpack");
 const dotenv = require("dotenv");
 dotenv.config();
 
@@ -15,14 +16,14 @@ module.exports = getWebpackOptions;
 function getWebpackOptions(env, args) {
   return {
     entry: getEntryOptions(env, args),
-    // externals: getExternals(env),
+    externals: getExternals(env),
     externalsPresets: getExternalsPresets(env),
     devServer: getDevServerOptions(env),
     devtool: getDevtoolOptions(env),
     mode: getModeOptions(env, args),
     module: getModuleOptions(),
     output: getOutputOptions(env, args),
-    plugins: getPluginsOptions(env),
+    plugins: getPluginsOptions(env, args),
     resolve: getResolveOptions(),
     target: getTargetOptions(env),
   };
@@ -49,27 +50,10 @@ function getExternals(env) {
   const externals = [];
   // if (process.env.webpack === "backend") externals.push(nodeExternals());
   if (env.excludeModules) externals.push(nodeExternals());
-  else if (env.excludeNode || env.serverless)
-    externals.push(
-      nodeExternals({
-        allowlist: ["express", "serverless-http"],
-      })
-    );
-  // else if (env.excludeNode || env.serverless)
-  //   externals.push(
-  //     nodeExternals({
-  //       modulesFromFiles: {
-  //         fileName: "package.json",
-  //         includeInBundle: ["dependencies"],
-  //         excludeFromBundle: ["devDependencies"],
-  //       },
-  //     })
-  //   );
   console.log(
-    "EXCLUDE MODULES: ",
-    env.excludeModules || !env.excludeNode || !env.serverless
+    "EXCLUDE ALL MODULES: ",
+    env.excludeModules || env.serverless ? false : true
   );
-  console.log("EXCLUDE NODE: ", env.excludeNode || env.serverless);
   return externals;
 }
 function getExternalsPresets(env) {
@@ -140,7 +124,7 @@ function getModeOptions(env, args) {
   //BUILT IN ENVIRONMENT VARIABLES https://webpack.js.org/api/cli/#env
   let modeOptions = "production";
   if (env.WEBPACK_SERVE) modeOptions = "development";
-  if (process.env.NODE_ENV) modeOptions = process.env.NODE_ENV;
+  // if (process.env.NODE_ENV) modeOptions = process.env.NODE_ENV;
   if (args.mode) modeOptions = args.mode;
   console.log("MODE: ", modeOptions);
   return modeOptions;
@@ -200,7 +184,7 @@ function getModuleOptions() {
   const moduleOptions = { rules: rulesOptions };
   return moduleOptions;
 }
-function getPluginsOptions(env) {
+function getPluginsOptions(env, args) {
   const pluginsOptions = [];
 
   if (process.env.webpack === "frontend") {
@@ -223,13 +207,27 @@ function getPluginsOptions(env) {
   pluginsOptions.push(new MiniCssExtractPlugin(miniCssExtractPluginOptions));
 
   //DOTENV FOR WEBPACK
+  console.log("ARGS: ", args);
   const isDevelopmentMode =
-    env.WEBPACK_SERVE || process.env.NODE_ENV === "development" ? true : false;
+    env.WEBPACK_SERVE ||
+    process.env.NODE_ENV ||
+    env.development ||
+    args.mode === "development"
+      ? true
+      : false;
   const dotenvOptions = isDevelopmentMode
     ? { path: "./.env" }
     : { path: ".env - BUNDLING FOR PRODUCTION" };
   const dotenv = new Dotenv(dotenvOptions);
   pluginsOptions.push(dotenv);
+
+  //IGNORE MODULES
+  //INFO - https://webpack.js.org/plugins/ignore-plugin/
+  // const ignoreModules = new IgnorePlugin({
+  //   resourceRegExp:
+  //     /^(sqlite3|oracledb|mysql2|aws4|snappy|kerberos|tedious|pg-native|pg-query-stream|@mongodb-js\/zstd|@aws-sdk\/credential-providers|mongodb-client-encryption)$/,
+  // });
+  // pluginsOptions.push(ignoreModules);
 
   return pluginsOptions;
 }
@@ -246,7 +244,7 @@ function getOutputOptions(env, _args) {
   if (env.cacheBuster) outputOptions.filename = "[name]-[hash].js"; //USE CACHE-BUSTER FILENAMES
 
   //INFO - https://thecodebarbarian.com/bundling-a-node-js-function-for-aws-lambda-with-webpack.html
-  if (env.serverless) outputOptions.libraryTarget = "umd";
+  if (env.serverless) outputOptions.libraryTarget = "commonjs";
 
   //OVERWRITE OUTPUT OPTIONS FOR BACKEND
   // if (process.env.webpack === "backend")
