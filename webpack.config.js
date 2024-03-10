@@ -3,7 +3,9 @@ const nodeExternals = require("webpack-node-externals");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const Dotenv = require("dotenv-webpack");
-const { IgnorePlugin } = require("webpack");
+const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
+// const getPort = require("./src/utils/serverUtils/getPort");
+
 const dotenv = require("dotenv");
 dotenv.config();
 
@@ -49,11 +51,8 @@ function getExternals(env) {
 
   const externals = [];
   // if (process.env.webpack === "backend") externals.push(nodeExternals());
-  if (env.excludeModules) externals.push(nodeExternals());
-  console.log(
-    "EXCLUDE ALL MODULES: ",
-    env.excludeModules || env.serverless ? false : true
-  );
+  if (env.excludeModules || env.serverless) externals.push(nodeExternals());
+  console.log("EXCLUDE ALL MODULES: ", env.excludeModules || env.serverless);
   return externals;
 }
 function getExternalsPresets(env) {
@@ -66,7 +65,10 @@ function getExternalsPresets(env) {
     externalsPresets.node = true;
   else if (env.includeNode) externalsPresets.node = false;
 
-  console.log("INCLUDE MODULES: ", env.excludeNode || env.serverless);
+  console.log(
+    "INCLUDE MODULES: ",
+    env.excludeNode || env.serverless ? false : true
+  );
   console.log(
     "INCLUDE NODE: ",
     env.includeNode || env.serverless ? false : true
@@ -173,12 +175,52 @@ function getModuleOptions() {
   };
   rulesOptions.push(babelLoaderRules);
 
-  //DYNAMICALLY INJECT CSS FILE INTO HTML DOM HEAD
-  const miniCssExtractPluginRules = {
-    test: /\.(scss|css)?$/,
+  //DYNAMICALLY INJECT STYLES INTO THE HTML DOM HEAD
+  //INFO - https://webpack.js.org/plugins/mini-css-extract-plugin/
+  //EXAMPLE: import "./MyComponent.scss"
+  //EXAMPLE: import "./index.css"
+  const injectStyles = {
+    test: /\.(scss|css)?$/, //MATCH THESE EXTENSIONS
+    exclude: /(\\styles\\|\\static\\|\\assets\\)/, //EXCLUDE THESE FOLDERS
     use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
   };
-  rulesOptions.push(miniCssExtractPluginRules);
+  rulesOptions.push(injectStyles);
+
+  //SASS FILES IN SPECIFIC FOLDERS WILL BE CONVERTED TO CSS STRINGS
+  //THEY WILL NOT BE INJECTED INTO THE HTML DOM HEAD
+  //EXAMPLE: import style1 from "styles/darkMode.scss"
+  //EXAMPLE: import style2 from "styles/lightMode.scss"
+  const sassRules = {
+    include: /(\\styles\\|\\static\\|\\assets\\)/, //CHECK THESE FOLDERS
+    test: /\.scss$/, //MATCH THIS EXTENSION
+    use: ["sass-loader"], //CONVERT TO CSS
+    type: "asset/source", //IMPORTS WILL STORE CODE
+  };
+  rulesOptions.push(sassRules);
+
+  //STATIC PAGES CAN BE REFERENCED AS A SOURCE
+  //EXAMPLE: import "static/index.html"
+  const staticPages = {
+    include: /(\\static\\|\\assets\\)/, //CHECK THESE FOLDERS
+    test: /\.html$/, //MATCH THIS EXTENSION
+    // type: "asset/source", //IMPORTS WILL STORE CODE
+    type: "asset/resource", //IMPORTS WILL STORE CODE
+    generator: {
+      filename: "[name][ext]", //PRESERVE ORIGINAL FILENAME
+      // emit: true,
+    },
+  };
+  rulesOptions.push(staticPages);
+
+  //CSS FILES CAN BE REFERENCED AS HREF
+  //EXAMPLE: import styles from "styles/css"
+  //EXAMPLE: <Stylesheet href={styles} />
+  const cssFiles = {
+    include: /(\\styles\\|\\static\\|\\assets\\)/, //CHECK THESE FOLDERS
+    test: /\.css$/, //MATCH THIS EXTENSION
+    type: "asset/resource", //IMPORTS WILL STORE HREF
+  };
+  rulesOptions.push(cssFiles);
 
   //MODULE OPTIONS
   const moduleOptions = { rules: rulesOptions };
@@ -262,31 +304,39 @@ function getResolveOptions() {
     //EXAMPLE import Title from "components/Title" WILL CHECK FOR Title.tsx FIRST
     extensions: [".tsx", ".ts", ".jsx", ".js", "..."],
 
+    //USE PATHS (ALIASES) IN TSCONFIG
+    //INFO - https://www.npmjs.com/package/tsconfig-paths-webpack-plugin
+    plugins: [
+      new TsconfigPathsPlugin({
+        extensions: [".ts", ".tsx", ".js", ".jsx", ".css", ".scss"],
+      }),
+    ],
+
     //ALIAS - https://webpack.js.org/configuration/resolve/#resolvealias
     //ALLOWS IMPORT FROM THE ALIAS INSTEAD OF RELATIVE PATH
     //EXAMPLE import Title from "components/Title" instead of "../../components/Title"
-    alias: {
-      assets: path.resolve("./src/assets/"),
-      bootstrap: path.resolve("./node_modules/bootstrap/"),
-      components: path.resolve("./src/components/"),
-      controllers: path.resolve("./src/controllers/"),
-      customer: path.resolve("./src/microservices/customer/"),
-      microservices: path.resolve("./src/microservices/"),
-      modules: path.resolve("./src/modules/"),
-      // data: path.resolve("./src/data/"),
-      models: path.resolve("./src/models/"),
-      modules: path.resolve("./src/modules/"),
-      product: path.resolve("./src/microservices/product/"),
-      project: path.resolve("./src/project/"),
-      public: path.resolve("./public/"),
-      views: path.resolve("./src/views/"),
-      routes: path.resolve("./src/routes/"),
-      root: path.resolve("./"),
-      utils: path.resolve("./src/utils/"),
-      scss: path.resolve("./src/scss/"),
-      skills: path.resolve("./src/skills/"),
-      src: path.resolve("./src/"),
-    },
+    // alias: {
+    //   assets: path.resolve("./src/assets/"),
+    //   bootstrap: path.resolve("./node_modules/bootstrap/"),
+    //   components: path.resolve("./src/components/"),
+    //   controllers: path.resolve("./src/controllers/"),
+    //   customer: path.resolve("./src/microservices/customer/"),
+    //   microservices: path.resolve("./src/microservices/"),
+    //   modules: path.resolve("./src/modules/"),
+    //   // data: path.resolve("./src/data/"),
+    //   models: path.resolve("./src/models/"),
+    //   modules: path.resolve("./src/modules/"),
+    //   product: path.resolve("./src/microservices/product/"),
+    //   project: path.resolve("./src/project/"),
+    //   public: path.resolve("./public/"),
+    //   views: path.resolve("./src/views/"),
+    //   routes: path.resolve("./src/routes/"),
+    //   root: path.resolve("./"),
+    //   utils: path.resolve("./src/utils/"),
+    //   scss: path.resolve("./src/scss/"),
+    //   skills: path.resolve("./src/skills/"),
+    //   src: path.resolve("./src/"),
+    // },
   };
   return resolveOptions;
 }

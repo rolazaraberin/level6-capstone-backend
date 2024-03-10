@@ -25,7 +25,7 @@
     "public-build": "npm run webpack-build",
     "claudia-init": "claudia create --handler build/src/index.handler --name level6-capstone-backend --cache-api-config staging --region us-west-1 --config .aws/claudia.json --role arn:aws:iam::115673921217:role/claudiajs --timeout 15 --runtime nodejs20.x --use-local-dependencies --deploy-proxy-api",
     "claudia-build": "npm run compile",
-    "claudia-deploy": "node src/utils/cluadiaJs/claudiaDeploy.js arn:aws:iam::115673921217:role/claudiajs",
+    "claudia-deploy": "node src/utils/claudiaJs/claudiaDeploy.js arn:aws:iam::115673921217:role/claudiajs .env",
     "claudia-test": "claudia test-lambda --config .aws/claudia.json",
     "claudia-delete": "claudia destroy --config .aws/claudia.json",
     "babel-build": "babel . --out-dir build --extensions .ts,.js,.tsx,.jsx, --delete-dir-on-start --ignore node_modules",
@@ -93,7 +93,8 @@
     "typescript-build": "ts-node src/utils/compile.ts",
     "webpack-compile": "webpack --mode none",
     "webpack-test": "webpack --config webpack.config.test.js",
-    "webpack-build": "webpack build --env serverless"
+    "webpack-build": "webpack build --env serverless",
+    "webpack-server": "webpack serve --entry src/index.ts --hot"
   },
   "keywords": [],
   "author": "",
