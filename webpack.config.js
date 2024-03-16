@@ -4,10 +4,13 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const Dotenv = require("dotenv-webpack");
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
-// const getPort = require("./src/utils/serverUtils/getPort");
+const CopyPlugin = require("copy-webpack-plugin");
+const { getPort } = require("./utils/getPort");
 
 const dotenv = require("dotenv");
 dotenv.config();
+
+const OUTPUT_PATH = path.resolve(__dirname, "./public");
 
 /*********************************************
  * EXPORT WEBPACK OPTIONS
@@ -65,13 +68,21 @@ function getExternalsPresets(env) {
     externalsPresets.node = true;
   else if (env.includeNode) externalsPresets.node = false;
 
-  console.log(
-    "INCLUDE MODULES: ",
-    env.excludeNode || env.serverless ? false : true
-  );
+  // console.log(
+  //   "INCLUDE MODULES: ",
+  //   env.excludeNode || env.serverless
+  //     ? false
+  //     : undefined || env.excludeModules
+  //     ? false
+  //     : undefined
+  // );
   console.log(
     "INCLUDE NODE: ",
-    env.includeNode || env.serverless ? false : true
+    env.includeNode || env.serverless
+      ? false
+      : undefined || env.excludeNode
+      ? false
+      : undefined
   );
   return externalsPresets;
 }
@@ -103,9 +114,10 @@ function getDevServerOptions(env) {
         ],
       },
     compress: true,
-    port: 8080,
+    port: getPort(8000),
+    // port: 8080,
   };
-  if (process.env.webpack === "backend") devServerOptions.port = 8000;
+  // if (process.env.webpack === "backend") devServerOptions.port = 8000;
   return devServerOptions;
 }
 function getDevtoolOptions(env) {
@@ -271,6 +283,12 @@ function getPluginsOptions(env, args) {
   // });
   // pluginsOptions.push(ignoreModules);
 
+  //COPY FILES IN THE STATIC FOLDER
+  const copyWebpackPlugin = new CopyPlugin({
+    patterns: [{ from: "./src/static", to: OUTPUT_PATH }],
+  });
+  pluginsOptions.push(copyWebpackPlugin);
+
   return pluginsOptions;
 }
 function getOutputOptions(env, _args) {
@@ -279,7 +297,8 @@ function getOutputOptions(env, _args) {
   const outputOptions = {
     // filename: "[name]-[hash].js", //USE CACHE-BUSTER FILENAMES
     filename: "[name].js", //USE DEFAULT FILENAMES
-    path: path.resolve(__dirname, "./public"), //PLACE WEBPACK FILES IN DIST DIRECTORY
+    path: OUTPUT_PATH, //PLACE WEBPACK FILES IN DIST DIRECTORY
+    // path: path.resolve(__dirname, "./public"), //PLACE WEBPACK FILES IN DIST DIRECTORY
     clean: true, //DELETE THE OLD BUILD FILES
   };
 
