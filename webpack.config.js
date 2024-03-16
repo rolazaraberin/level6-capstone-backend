@@ -6,7 +6,8 @@ const Dotenv = require("dotenv-webpack");
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 const { getPort } = require("./utils/getPort");
-
+const { isExecutable } = require("./src/utils/generalUtils/isExecutable");
+const webpack = require("webpack");
 const dotenv = require("dotenv");
 dotenv.config();
 
@@ -17,6 +18,8 @@ const OUTPUT_PATH = path.resolve(__dirname, "./public");
  *********************************************/
 //EXPORTING OPTIONS AS A FUNCTION https://webpack.js.org/api/cli/#environment-options
 module.exports = getWebpackOptions;
+
+const GLOBAL = { entryFile: "./build/src/index.js" };
 
 function getWebpackOptions(env, args) {
   return {
@@ -37,14 +40,16 @@ function getWebpackOptions(env, args) {
 function getEntryOptions(env, args) {
   //INFO - https://webpack.js.org/configuration/entry-context/#entry
   const entryOptions = {
-    index: "./build/src/index.js",
+    index: GLOBAL.entryFile,
   };
 
   // if (process.env.webpack === "backend" || env.entry === "build")
   //   entryOptions.index = "./build/src/index.js";
   // if (args.mode) entryOptions.index = "./src/index.js";
+  if (args.entry) entryOptions.index = args.entry[0];
   if (env.WEBPACK_SERVE) entryOptions.index = "./src/index.js";
   console.log("ENTRY: ", entryOptions.index);
+  GLOBAL.entryFile = entryOptions.index;
   return entryOptions;
 }
 function getExternals(env) {
@@ -54,36 +59,42 @@ function getExternals(env) {
 
   const externals = [];
   // if (process.env.webpack === "backend") externals.push(nodeExternals());
-  if (env.excludeModules || env.serverless) externals.push(nodeExternals());
-  console.log("EXCLUDE ALL MODULES: ", env.excludeModules || env.serverless);
+  if (env.excludeModules || env.serverless) {
+    console.log("BUNDLE MODULES: ", false);
+    externals.push(nodeExternals());
+  } else console.log("BUNDLE MODULES: ", true);
+  // else if (env.excludeNode || env.serverless)
+  //   externals.push(
+  //     nodeExternals({
+  //       allowlist: ["express", "serverless-http"],
+  //     })
+  //   );
+  // else if (env.excludeNode || env.serverless)
+  //   externals.push(
+  //     nodeExternals({
+  //       modulesFromFiles: {
+  //         fileName: "package.json",
+  //         includeInBundle: ["dependencies"],
+  //         excludeFromBundle: ["devDependencies"],
+  //       },
+  //     })
+  //   );
+  // console.log("EXCLUDE NODE: ", env.excludeNode || env.serverless);
   return externals;
 }
 function getExternalsPresets(env) {
   //DO NOT BUNDLE NODE CORE MODULES, BUT BUNDLE OTHER MODULES
-  //GOOD FOR LAMBDA
+  //GOOD FOR LAMBDA FUNCTIONS
   //INFO - https://webpack.js.org/configuration/externals/#externalspresets
 
   const externalsPresets = {};
-  if (env.excludeModules || env.excludeNode || env.serverless)
+  if (env.excludeModules || env.excludeNode || env.serverless) {
+    console.log("EXCLUDE NODE: ", true);
     externalsPresets.node = true;
-  else if (env.includeNode) externalsPresets.node = false;
-
-  // console.log(
-  //   "INCLUDE MODULES: ",
-  //   env.excludeNode || env.serverless
-  //     ? false
-  //     : undefined || env.excludeModules
-  //     ? false
-  //     : undefined
-  // );
-  console.log(
-    "INCLUDE NODE: ",
-    env.includeNode || env.serverless
-      ? false
-      : undefined || env.excludeNode
-      ? false
-      : undefined
-  );
+  } else if (env.includeNode) {
+    console.log("EXCLUDE NODE: ", false);
+    externalsPresets.node = false;
+  }
   return externalsPresets;
 }
 function getDevServerOptions(env) {
@@ -124,14 +135,16 @@ function getDevtoolOptions(env) {
   //ORIGINAL LINES - https://webpack.js.org/configuration/devtool/#devtool
 
   let devtoolOptions = undefined;
-  if (env.WEBPACK_SERVE) devtoolOptions = "source-map";
+  if (env.WEBPACK_SERVE) {
+    console.log("SOURCEMAP: ", true);
+    devtoolOptions = "source-map";
+  }
   // if (env.WEBPACK_SERVE) devtoolOptions = "inline-source-map";
   // const devtoolOptions = "eval-source-map";
   // const devtoolOptions = "eval-cheap-module-source-map";
   // const devtoolOptions = "eval-nosources-source-map";
   // const devtoolOptions = "source-map";
   // const devtoolOptions = "hidden-source-map";
-  console.log("SOURCEMAP: ", devtoolOptions);
   return devtoolOptions;
 }
 function getModeOptions(env, args) {
@@ -289,9 +302,20 @@ function getPluginsOptions(env, args) {
   });
   pluginsOptions.push(copyWebpackPlugin);
 
+  //ONE CHUNK FOR STANDALONE
+  if (env.standalone) {
+    //INFO - https://medium.com/@glennreyes/how-to-disable-code-splitting-in-webpack-1c0b1754a3c5
+    console.log("ONE CHUNK: ", true);
+    const oneChunk = new webpack.optimize.LimitChunkCountPlugin({
+      maxChunks: 1,
+    });
+    pluginsOptions.push(oneChunk);
+  }
+
   return pluginsOptions;
 }
-function getOutputOptions(env, _args) {
+
+function getOutputOptions(env, args) {
   //INFO - https://webpack.js.org/concepts/output
   //INFO - https://webpack.js.org/configuration/output/#outputfilename
   const outputOptions = {
@@ -302,10 +326,20 @@ function getOutputOptions(env, _args) {
     clean: true, //DELETE THE OLD BUILD FILES
   };
 
+  if (env.standalone) {
+    const basename = path.basename(args.entry[0]);
+    const filename = path.parse(basename).name + ".js";
+    outputOptions.filename = filename;
+    outputOptions.path = path.resolve(path.dirname(args.entry[0]));
+    outputOptions.clean = false;
+  }
   if (env.cacheBuster) outputOptions.filename = "[name]-[hash].js"; //USE CACHE-BUSTER FILENAMES
 
   //INFO - https://thecodebarbarian.com/bundling-a-node-js-function-for-aws-lambda-with-webpack.html
-  if (env.serverless) outputOptions.libraryTarget = "commonjs";
+  if (env.serverless || !isExecutable(GLOBAL.entryFile)) {
+    console.log("LIBRARY: ", true);
+    outputOptions.libraryTarget = "commonjs";
+  }
 
   //OVERWRITE OUTPUT OPTIONS FOR BACKEND
   // if (process.env.webpack === "backend")

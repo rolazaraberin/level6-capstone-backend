@@ -1,4 +1,4 @@
-name: CI/CD Apprentice 2
+name: Level 6 Capstone Backend
 run-name: ${{ github.actor }} started GitHub Actions 🚀
 on: [push]
 env:
@@ -12,8 +12,8 @@ env:
   mongodbPort: ${{ secrets.mongodbPort }}
   sendGridApiKey: ${{ secrets.sendGridApiKey }}
   disableEmails: ${{ secrets.disableEmails }}
-  webpack: ${{ secrets.webpack }}
   environment: ${{ github.ref_name }}
+  # webpack: ${{ secrets.webpack }}
 jobs:
   # Test:
   #   runs-on: ubuntu-latest
@@ -51,7 +51,9 @@ jobs:
           echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
           npm install
       - name: Build distribution code
-        run: npm run public-build
+        run: |
+          echo "Building distribution code..."
+          npm run build
       - name: Produce downloadable build
         uses: actions/upload-artifact@v3
         with:
