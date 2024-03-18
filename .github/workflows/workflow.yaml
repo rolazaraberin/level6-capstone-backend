@@ -2,9 +2,9 @@ name: Level 6 Capstone Backend
 run-name: ${{ github.actor }} started GitHub Actions 🚀
 on: [push]
 env:
-  mode: ${{ secrets.mode }}
+  mode: ${{ env.MODE }}
   mongodb: ${{ secrets.mongodb }}
-  mongodbConnectionString: ${{ secrets.mongodbConnectionString }}
+  mongodbConnectionString: ${{ env.MONGODB_CONNECTION_STRING }}
   mongodbUser: ${{ secrets.mongodbUser }}
   mongodbPassword: ${{ secrets.mongodbPassword }}
   mongodbDatabase: ${{ secrets.mongodbDatabase }}
