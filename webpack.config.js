@@ -11,6 +11,9 @@ const webpack = require("webpack");
 const dotenv = require("dotenv");
 dotenv.config();
 
+const BUILD_FOLDER = "build";
+const STATIC_FOLDER = "src/static";
+const ENTRY_FILE = "src/index.js";
 const OUTPUT_PATH = path.resolve(__dirname, "./public");
 
 /*********************************************
@@ -19,7 +22,7 @@ const OUTPUT_PATH = path.resolve(__dirname, "./public");
 //EXPORTING OPTIONS AS A FUNCTION https://webpack.js.org/api/cli/#environment-options
 module.exports = getWebpackOptions;
 
-const GLOBAL = { entryFile: "./build/src/index.js" };
+const GLOBAL = { entryFile: path.resolve(BUILD_FOLDER, ENTRY_FILE) };
 
 function getWebpackOptions(env, args) {
   return {
@@ -47,7 +50,7 @@ function getEntryOptions(env, args) {
   //   entryOptions.index = "./build/src/index.js";
   // if (args.mode) entryOptions.index = "./src/index.js";
   if (args.entry) entryOptions.index = args.entry[0];
-  if (env.WEBPACK_SERVE) entryOptions.index = "./src/index.js";
+  if (env.WEBPACK_SERVE) entryOptions.index = path.resolve(ENTRY_FILE);
   console.log("ENTRY: ", entryOptions.index);
   GLOBAL.entryFile = entryOptions.index;
   return entryOptions;
@@ -298,7 +301,9 @@ function getPluginsOptions(env, args) {
 
   //COPY FILES IN THE STATIC FOLDER
   const copyWebpackPlugin = new CopyPlugin({
-    patterns: [{ from: "./src/static", to: OUTPUT_PATH }],
+    patterns: [
+      { from: path.resolve(BUILD_FOLDER, STATIC_FOLDER), to: OUTPUT_PATH },
+    ],
   });
   pluginsOptions.push(copyWebpackPlugin);
 
