@@ -3,11 +3,11 @@ run-name: ${{ github.actor }} started GitHub Actions 🚀
 on: [push]
 env:
   mongodbConnectionString: ${{ secrets.MONGODB_CONNECTION_STRING }}
+  mongodbDatabase: ${{ secrets.MONGODB_DATABASE }}
 #   mode: ${{ vars.MODE }}
 #   mongodb: ${{ secrets.mongodb }}
 #   mongodbUser: ${{ secrets.mongodbUser }}
 #   mongodbPassword: ${{ secrets.mongodbPassword }}
-#   mongodbDatabase: ${{ secrets.mongodbDatabase }}
 #   mongodbHost: ${{ secrets.mongodbHost }}
 #   mongodbPort: ${{ secrets.mongodbPort }}
 #   sendGridApiKey: ${{ secrets.sendGridApiKey }}
