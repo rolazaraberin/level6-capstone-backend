@@ -3,7 +3,7 @@ run-name: ${{ github.actor }} started GitHub Actions 🚀
 on: [push]
 env:
   mongodbConnectionString: ${{ secrets.MONGODB_CONNECTION_STRING }}
-  mongodbDatabase: ${{ secrets.MONGODB_DATABASE }}
+  mongodbDatabase: ${{ vars.MONGODB_DATABASE }}
 #   mode: ${{ vars.MODE }}
 #   mongodb: ${{ secrets.mongodb }}
 #   mongodbUser: ${{ secrets.mongodbUser }}
