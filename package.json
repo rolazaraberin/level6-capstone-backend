@@ -27,7 +27,7 @@
     "public-build": "npm run webpack-build",
     "claudia-init": "claudia create --handler build/src/index.handler --name level6-capstone-backend --cache-api-config staging --region us-west-1 --config .aws/claudia.json --role arn:aws:iam::115673921217:role/claudiajs --timeout 15 --runtime nodejs20.x --use-local-dependencies --deploy-proxy-api",
     "claudia-build": "npm run compile",
-    "claudia-deploy": "node utils/claudiaDeploy.js arn:aws:iam::115673921217:role/claudiajs",
+    "claudia-deploy": "node tools/claudiaDeploy.js arn:aws:iam::115673921217:role/claudiajs",
     "claudia-test": "claudia test-lambda --config .cluaidaJs/claudia.json",
     "claudia-delete": "claudia destroy --config .claudiaJs/claudia.json",
     "babel-build": "babel . --out-dir build --extensions .ts,.js,.tsx,.jsx, --delete-dir-on-start --ignore node_modules",
