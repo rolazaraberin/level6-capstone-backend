@@ -4,7 +4,8 @@ on: [push]
 env:
   mongodbConnectionString: ${{ secrets.MONGODB_CONNECTION_STRING }}
   mongodbDatabase: ${{ vars.MONGODB_DATABASE }}
-#   mode: ${{ vars.MODE }}
+  mode: ${{ vars.MODE }}
+  hostEnvironment: ${{ vars.HOST_ENVIRONMENT }}
 #   mongodb: ${{ secrets.mongodb }}
 #   mongodbUser: ${{ secrets.mongodbUser }}
 #   mongodbPassword: ${{ secrets.mongodbPassword }}
