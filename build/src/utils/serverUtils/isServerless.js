@@ -1,0 +1,1 @@
+"use strict";function isServerless(){return"serverless"===process.env.hostEnvironment||"lambda"===process.env.hostEnvironment||process.env.AWS_LAMBDA_FUNCTION_NAME||process.env.AWS_LAMBDA_FUNCTION_VERSION}Object.defineProperty(exports,"__esModule",{value:!0}),exports.isServerless=void 0,exports.isServerless=isServerless;

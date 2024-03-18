@@ -1,0 +1,1 @@
+"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.getHost=void 0;const isDockerEnvironment_1=require("../generalUtils/isDockerEnvironment");function getHost(defaultHost="localhost"){return(0,isDockerEnvironment_1.isDockerEnvironment)()?"0.0.0.0":process.env.host||defaultHost}exports.getHost=getHost;

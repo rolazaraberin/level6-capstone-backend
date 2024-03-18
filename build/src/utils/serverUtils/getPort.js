@@ -1,0 +1,1 @@
+"use strict";function getPort(defaultPort=8e3){return Number(process.env.PORT)||defaultPort}Object.defineProperty(exports,"__esModule",{value:!0}),exports.getPort=void 0,exports.getPort=getPort;
