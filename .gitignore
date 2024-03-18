@@ -22,10 +22,7 @@
 !.github
 !.github/**
 !**/.github/**
-!.claudiaJs
-!.claudiaJs/**
-!**/.claudiaJs/**
 !claudiaDeploy.js
-!utils
-!utils/**
-!./utils/**
+!tools
+!tools/**
+!./tools/**
