@@ -27,3 +27,6 @@
 !tools/**
 !./tools/**
 !tsconfig.json
+!.claudiaJs
+!.claudiaJs/**
+!**/.claudiaJs/**
