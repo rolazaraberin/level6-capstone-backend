@@ -1,22 +1,22 @@
 name: Level 6 Capstone Backend
 run-name: ${{ github.actor }} started GitHub Actions 🚀
 on: [push]
-env:
-  mode: ${{ MODE }}
-  mongodb: ${{ secrets.mongodb }}
-  mongodbConnectionString: ${{ MONGODB_CONNECTION_STRING }}
-  mongodbUser: ${{ secrets.mongodbUser }}
-  mongodbPassword: ${{ secrets.mongodbPassword }}
-  mongodbDatabase: ${{ secrets.mongodbDatabase }}
-  mongodbHost: ${{ secrets.mongodbHost }}
-  mongodbPort: ${{ secrets.mongodbPort }}
-  sendGridApiKey: ${{ secrets.sendGridApiKey }}
-  disableEmails: ${{ secrets.disableEmails }}
-  environment: ${{ github.ref_name }}
-  "AWS_ACCESS_KEY_ID": ${{ secrets.AWS_ACCESS_KEY_ID }}
-  "AWS_SECRET_ACCESS_KEY": ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-  "AWS_REGION": ${{ vars.AWS_REGION }}
-  # webpack: ${{ secrets.webpack }}
+# env:
+#   mode: ${{ vars.MODE }}
+#   mongodb: ${{ secrets.mongodb }}
+#   mongodbConnectionString: ${{ secrets.MONGODB_CONNECTION_STRING }}
+#   mongodbUser: ${{ secrets.mongodbUser }}
+#   mongodbPassword: ${{ secrets.mongodbPassword }}
+#   mongodbDatabase: ${{ secrets.mongodbDatabase }}
+#   mongodbHost: ${{ secrets.mongodbHost }}
+#   mongodbPort: ${{ secrets.mongodbPort }}
+#   sendGridApiKey: ${{ secrets.sendGridApiKey }}
+#   disableEmails: ${{ secrets.disableEmails }}
+#   environment: ${{ github.ref_name }}
+#   "AWS_ACCESS_KEY_ID": ${{ secrets.AWS_ACCESS_KEY_ID }}
+#   "AWS_SECRET_ACCESS_KEY": ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#   "AWS_REGION": ${{ vars.AWS_REGION }}
+#   webpack: ${{ secrets.webpack }}
 jobs:
   # Test:
   #   runs-on: ubuntu-latest
