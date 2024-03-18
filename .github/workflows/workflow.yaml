@@ -13,8 +13,8 @@ env:
   sendGridApiKey: ${{ secrets.sendGridApiKey }}
   disableEmails: ${{ secrets.disableEmails }}
   environment: ${{ github.ref_name }}
-  "AWS_ACCESS_KEY_ID": ${{secrets.AWS_ACCESS_KEY_ID}}
-  "AWS_SECRET_ACCESS_KEY": ${{secrets.AWS_SECRET_ACCESS_KEY}}
+  "AWS_ACCESS_KEY_ID": ${{ secrets.AWS_ACCESS_KEY_ID }}
+  "AWS_SECRET_ACCESS_KEY": ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   # webpack: ${{ secrets.webpack }}
 jobs:
   # Test:
@@ -85,7 +85,7 @@ jobs:
           npm run deploy
       - run: |
           echo "🍏 This job's status is ${{ job.status }}."
-          echo "The app is deployed to ${{ vars.LAMBDA_URL}}"
+          echo "The app is deployed to ${{ vars.LAMBDA_URL }}"
   # Migrations:
   #  runs-on: ubuntu-latest
   #  needs: [Build]
