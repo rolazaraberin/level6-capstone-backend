@@ -41,7 +41,7 @@
       "components/*": ["src/components/*"],
       "controllers/*": ["src/controllers/*"],
       "customer/*": ["src/microservices/customer/*"],
-      "microservices": ["src/microservices/*"],
+      "microservices/*": ["src/microservices/*"],
       "models/*": ["src/models/*"],
       "modules/*": ["src/modules/*"],
       "project/*": ["src/project/*"],

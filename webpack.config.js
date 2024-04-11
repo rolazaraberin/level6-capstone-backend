@@ -15,14 +15,13 @@ const BUILD_FOLDER = "build";
 const STATIC_FOLDER = "src/static";
 const ENTRY_FILE = "src/index.js";
 const OUTPUT_PATH = path.resolve(__dirname, "./public");
+const GLOBAL = { entryFile: path.resolve(BUILD_FOLDER, ENTRY_FILE) };
 
 /*********************************************
  * EXPORT WEBPACK OPTIONS
  *********************************************/
 //EXPORTING OPTIONS AS A FUNCTION https://webpack.js.org/api/cli/#environment-options
 module.exports = getWebpackOptions;
-
-const GLOBAL = { entryFile: path.resolve(BUILD_FOLDER, ENTRY_FILE) };
 
 function getWebpackOptions(env, args) {
   return {

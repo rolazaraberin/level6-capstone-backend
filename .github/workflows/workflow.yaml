@@ -90,7 +90,7 @@ jobs:
         run: |
           echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
           npm install
-          npm run deploy
+          npm run claudia-deploy
       - run: |
           echo "🍏 This job's status is ${{ job.status }}."
           echo "The app is deployed to ${{ vars.LAMBDA_URL }}"

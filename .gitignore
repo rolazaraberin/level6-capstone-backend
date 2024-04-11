@@ -22,7 +22,6 @@
 !.github
 !.github/**
 !**/.github/**
-!claudiaDeploy.js
 !tools
 !tools/**
 !./tools/**
