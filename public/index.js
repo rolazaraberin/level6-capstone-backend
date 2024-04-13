@@ -1,7 +1,7 @@
-/**/ (() => {
+(() => {
   "use strict";
   var e = {
-      4334: function (e, t, n) {
+      9066: function (e, t, n) {
         var r =
           (this && this.__importDefault) ||
           function (e) {
@@ -16,11 +16,11 @@
             t.createAccountByGoogle =
             t.createAccountByPassword =
               void 0);
-        const o = n(2553),
-          i = r(n(126)),
-          a = n(7846),
-          s = r(n(7825)),
-          u = n(921);
+        const o = n(8042),
+          i = r(n(5008)),
+          a = n(4072),
+          s = r(n(8001)),
+          u = n(9628);
         async function c(e, t, n) {
           await (0, o.deleteCartById)(e),
             await (0, a.deleteLoginByEmail)(t),
@@ -73,15 +73,15 @@
           }),
           (t.getAccountById = d);
       },
-      3585: function (e, t, n) {
+      5772: function (e, t, n) {
         var r =
           (this && this.__importDefault) ||
           function (e) {
             return e && e.__esModule ? e : { default: e };
           };
         Object.defineProperty(t, "__esModule", { value: !0 });
-        const o = r(n(7825)),
-          i = n(921),
+        const o = r(n(8001)),
+          i = n(9628),
           a = {
             ping: async function (e, t) {
               try {
@@ -97,17 +97,17 @@
           };
         t.default = a;
       },
-      380: function (e, t, n) {
+      863: function (e, t, n) {
         var r =
           (this && this.__importDefault) ||
           function (e) {
             return e && e.__esModule ? e : { default: e };
           };
         Object.defineProperty(t, "__esModule", { value: !0 });
-        const o = r(n(7825)),
-          i = n(9577),
-          a = n(2433),
-          s = r(n(1043)),
+        const o = r(n(8001)),
+          i = n(218),
+          a = n(2787),
+          s = r(n(8996)),
           u = {
             cart: async function (e, t, n) {
               if (!e) throw new Error("ERROR: invalid cart id");
@@ -169,7 +169,7 @@
           };
         t.default = u;
       },
-      2553: function (e, t, n) {
+      8042: function (e, t, n) {
         var r =
             (this && this.__createBinding) ||
             (Object.create
@@ -251,14 +251,14 @@
             t.getCartByToken =
             t.getCartById =
               void 0);
-        const u = i(n(3660)),
-          c = n(921),
-          d = s(n(8402)),
-          l = s(n(6886)),
+        const u = i(n(962)),
+          c = n(9628),
+          d = s(n(77)),
+          l = s(n(9318)),
           f = n(8013),
-          p = s(n(6368)),
-          y = n(2433),
-          h = n(950);
+          p = s(n(7157)),
+          y = n(2787),
+          h = n(7440);
         async function m(e) {
           p.default.cart_id(e);
           const t = await d.default.getOne({ _id: e });
@@ -333,16 +333,16 @@
             return await d.default.updateOne(i), await m(e._id);
           });
       },
-      126: function (e, t, n) {
+      5008: function (e, t, n) {
         var r =
           (this && this.__importDefault) ||
           function (e) {
             return e && e.__esModule ? e : { default: e };
           };
         Object.defineProperty(t, "__esModule", { value: !0 });
-        const o = n(2433),
-          i = n(9577),
-          a = r(n(1043)),
+        const o = n(2787),
+          i = n(218),
+          a = r(n(8996)),
           s = {
             invalidate: async function (e) {
               const t = { _id: e, token: "" };
@@ -369,7 +369,7 @@
           };
         t.default = s;
       },
-      4321: function (e, t, n) {
+      2324: function (e, t, n) {
         var r =
           (this && this.__importDefault) ||
           function (e) {
@@ -380,8 +380,8 @@
             t.injectDependencies =
             t.getInventory =
               void 0);
-        const o = r(n(9176)),
-          i = n(2373);
+        const o = r(n(224)),
+          i = n(1096);
         let a = o.default;
         (t.getInventory = async function () {
           const e = await a.getOne(),
@@ -395,7 +395,7 @@
             (a = o.default), (0, i.restoreDependency)();
           });
       },
-      2373: function (e, t, n) {
+      1096: function (e, t, n) {
         var r =
           (this && this.__importDefault) ||
           function (e) {
@@ -408,8 +408,8 @@
             t.getItemsById =
             t.getItemById =
               void 0);
-        const o = n(2433),
-          i = r(n(6886));
+        const o = n(2787),
+          i = r(n(9318));
         let a = i.default;
         (t.getItemById = async function (e) {
           return await a.getOne({ _id: e });
@@ -430,17 +430,17 @@
             a = i.default;
           });
       },
-      6270: function (e, t, n) {
+      346: function (e, t, n) {
         var r =
           (this && this.__importDefault) ||
           function (e) {
             return e && e.__esModule ? e : { default: e };
           };
         Object.defineProperty(t, "__esModule", { value: !0 });
-        const o = r(n(380)),
-          i = r(n(126)),
-          a = n(56),
-          s = r(n(7477)),
+        const o = r(n(863)),
+          i = r(n(5008)),
+          a = n(8844),
+          s = r(n(3188)),
           u = {
             withToken: async function (e, t, n) {
               const { email: r, token: i } = e.body;
@@ -506,7 +506,7 @@
           };
         t.default = u;
       },
-      7846: function (e, t, n) {
+      4072: function (e, t, n) {
         var r =
           (this && this.__importDefault) ||
           function (e) {
@@ -520,13 +520,13 @@
             t.createLoginByGoogle =
             t.createLoginByPassword =
               void 0);
-        const o = n(9577),
-          i = r(n(126)),
-          a = r(n(185)),
-          s = r(n(7477)),
-          u = r(n(1043)),
-          c = r(n(2216)),
-          d = n(921);
+        const o = n(218),
+          i = r(n(5008)),
+          a = r(n(9905)),
+          s = r(n(3188)),
+          u = r(n(8996)),
+          c = r(n(829)),
+          d = n(9628);
         (t.createLoginByPassword = async function (e, t, n) {
           a.default.email(e),
             a.default.password(t),
@@ -584,16 +584,16 @@
             return await (0, d.getUserById)(i);
           });
       },
-      3986: function (e, t, n) {
+      3735: function (e, t, n) {
         var r =
           (this && this.__importDefault) ||
           function (e) {
             return e && e.__esModule ? e : { default: e };
           };
         Object.defineProperty(t, "__esModule", { value: !0 });
-        const o = r(n(380)),
-          i = r(n(126)),
-          a = n(56),
+        const o = r(n(863)),
+          i = r(n(5008)),
+          a = n(8844),
           s = {
             withToken: async function (e, t) {
               try {
@@ -614,7 +614,7 @@
           };
         t.default = s;
       },
-      3215: function (e, t, n) {
+      6043: function (e, t, n) {
         var r =
           (this && this.__importDefault) ||
           function (e) {
@@ -623,7 +623,7 @@
         Object.defineProperty(t, "__esModule", { value: !0 });
         const o = r(n(2139)),
           i = r(n(5142)),
-          a = n(56);
+          a = n(8844);
         i.default.config();
         const s = {
           signupConfirmation: function (e) {
@@ -672,18 +672,18 @@
         }
         (t.default = s), o.default.setApiKey(process.env.sendGridApiKey);
       },
-      155: function (e, t, n) {
+      1858: function (e, t, n) {
         var r =
           (this && this.__importDefault) ||
           function (e) {
             return e && e.__esModule ? e : { default: e };
           };
         Object.defineProperty(t, "__esModule", { value: !0 });
-        const o = r(n(3215)),
+        const o = r(n(6043)),
           i = r(n(5142)),
-          a = n(4334),
-          s = n(56),
-          u = r(n(7477)),
+          a = n(9066),
+          s = n(8844),
+          u = r(n(3188)),
           c = {
             withPassword: async function (e, t, n) {
               try {
@@ -724,17 +724,17 @@
         (t.default = c), i.default.config();
         const d = process.env.disableEmails;
       },
-      6416: function (e, t, n) {
+      9200: function (e, t, n) {
         var r =
           (this && this.__importDefault) ||
           function (e) {
             return e && e.__esModule ? e : { default: e };
           };
         Object.defineProperty(t, "__esModule", { value: !0 });
-        const o = r(n(3215)),
+        const o = r(n(6043)),
           i = r(n(5142)),
-          a = n(56),
-          s = n(4334),
+          a = n(8844),
+          s = n(9066),
           u = {
             fetchInfo: async function (e, t) {
               try {
@@ -773,7 +773,7 @@
         (t.default = u), i.default.config();
         const c = process.env.disableEmails;
       },
-      921: function (e, t, n) {
+      9628: function (e, t, n) {
         var r =
           (this && this.__importDefault) ||
           function (e) {
@@ -787,13 +787,13 @@
             t.getCartId =
             t.createUserByEmail =
               void 0);
-        const o = n(9577),
-          i = n(7846),
-          a = n(2553),
-          s = r(n(7825)),
-          u = r(n(185)),
-          c = r(n(2216)),
-          d = r(n(1043));
+        const o = n(218),
+          i = n(4072),
+          a = n(8042),
+          s = r(n(8001)),
+          u = r(n(9905)),
+          c = r(n(829)),
+          d = r(n(8996));
         async function l(e) {
           try {
             if (!e) throw new Error("ERROR: user id is required");
@@ -845,7 +845,7 @@
             return (n._id = r.insertedId), n;
           });
       },
-      9124: function (e, t, n) {
+      6083: function (e, t, n) {
         var r =
           (this && this.__importDefault) ||
           function (e) {
@@ -856,13 +856,13 @@
           n(3236);
         const o = r(n(6860)),
           i = r(n(3582)),
-          a = r(n(8823)),
-          s = (r(n(5734)), r(n(3309)), n(4321), n(8347)),
+          a = r(n(6919)),
+          s = (r(n(9137)), r(n(3440)), n(2324), n(6959)),
           u = r(n(724)),
           c = r(n(5142)),
-          d = n(2636),
-          l = n(6935),
-          f = n(8240);
+          d = n(4275),
+          l = n(8719),
+          f = n(516);
         c.default.config();
         const p = (0, o.default)(),
           y = (0, l.getHost)("localhost"),
@@ -878,18 +878,17 @@
               (0, s.isDockerEnvironment)()
                 ? console.log(`Listening on http://localhost:${h}`)
                 : console.log(`Listening on http://${y}:${h}`);
-            }));
-        const m = (0, u.default)(p);
-        t.handler = async (e, t) => await m(e, t);
+            })),
+          (t.handler = (0, u.default)(p));
       },
-      8395: (e, t, n) => {
+      9347: (e, t, n) => {
         Object.defineProperty(t, "__esModule", { value: !0 }),
           (t.MICROSERVICES = void 0);
-        const r = n(1730),
-          o = n(9237);
+        const r = n(1745),
+          o = n(3894);
         t.MICROSERVICES = { customer: r.CONTROLLERS, product: o.CONTROLLERS };
       },
-      1730: function (e, t, n) {
+      1745: function (e, t, n) {
         var r =
           (this && this.__importDefault) ||
           function (e) {
@@ -897,11 +896,11 @@
           };
         Object.defineProperty(t, "__esModule", { value: !0 }),
           (t.CONTROLLERS = void 0);
-        const o = r(n(1043)),
-          i = r(n(2216));
+        const o = r(n(8996)),
+          i = r(n(829));
         t.CONTROLLERS = { login: o.default, user: i.default };
       },
-      1043: function (e, t, n) {
+      8996: function (e, t, n) {
         var r =
           (this && this.__rest) ||
           function (e, t) {
@@ -923,8 +922,8 @@
             return n;
           };
         Object.defineProperty(t, "__esModule", { value: !0 });
-        const o = n(1272),
-          i = n(2433),
+        const o = n(7658),
+          i = n(2787),
           a = o.mongodb.getCollection("login"),
           s = {
             getOne: async function (e) {
@@ -950,7 +949,7 @@
           };
         t.default = s;
       },
-      2216: function (e, t, n) {
+      829: function (e, t, n) {
         var r =
             (this && this.__rest) ||
             function (e, t) {
@@ -977,9 +976,9 @@
               return e && e.__esModule ? e : { default: e };
             };
         Object.defineProperty(t, "__esModule", { value: !0 });
-        const i = n(1272),
-          a = o(n(185)),
-          s = n(2433),
+        const i = n(7658),
+          a = o(n(9905)),
+          s = n(2787),
           u = n(8013),
           c = {
             getOne: async function (e) {
@@ -1010,14 +1009,14 @@
         t.default = c;
         const d = i.mongodb.getCollection("user");
       },
-      185: function (e, t, n) {
+      9905: function (e, t, n) {
         var r =
           (this && this.__importDefault) ||
           function (e) {
             return e && e.__esModule ? e : { default: e };
           };
         Object.defineProperty(t, "__esModule", { value: !0 });
-        const o = r(n(7825)),
+        const o = r(n(8001)),
           i = {
             email: function (e) {
               if (!e) throw new Error("ERROR: email is required");
@@ -1047,16 +1046,16 @@
           };
         t.default = i;
       },
-      7477: function (e, t, n) {
+      3188: function (e, t, n) {
         var r =
           (this && this.__importDefault) ||
           function (e) {
             return e && e.__esModule ? e : { default: e };
           };
         Object.defineProperty(t, "__esModule", { value: !0 });
-        const o = n(9577),
-          i = r(n(185)),
-          a = r(n(1043)),
+        const o = n(218),
+          i = r(n(9905)),
+          a = r(n(8996)),
           s = {
             signupEmail: async function (e) {
               i.default.email(e);
@@ -1084,7 +1083,7 @@
           c = {},
           d = 6e4;
       },
-      1272: function (e, t, n) {
+      7658: function (e, t, n) {
         var r =
           (this && this.__importDefault) ||
           function (e) {
@@ -1092,8 +1091,8 @@
           };
         Object.defineProperty(t, "__esModule", { value: !0 }),
           (t.mongodb = t.sql = t.typeorm = t.knex = void 0);
-        const o = r(n(457)),
-          i = r(n(3794)),
+        const o = r(n(6513)),
+          i = r(n(7482)),
           a = new o.default();
         a.configureMongodb(i.default),
           (t.knex = a.knex),
@@ -1101,7 +1100,7 @@
           (t.sql = a.sql),
           (t.mongodb = a.mongodb);
       },
-      3794: function (e, t, n) {
+      7482: function (e, t, n) {
         var r =
           (this && this.__importDefault) ||
           function (e) {
@@ -1121,7 +1120,7 @@
         };
         t.default = a;
       },
-      9237: function (e, t, n) {
+      3894: function (e, t, n) {
         var r =
           (this && this.__importDefault) ||
           function (e) {
@@ -1129,16 +1128,16 @@
           };
         Object.defineProperty(t, "__esModule", { value: !0 }),
           (t.CONTROLLERS = void 0);
-        const o = r(n(8402)),
-          i = r(n(6886)),
-          a = r(n(9176));
+        const o = r(n(77)),
+          i = r(n(9318)),
+          a = r(n(224));
         t.CONTROLLERS = {
           cart: o.default,
           item: i.default,
           inventory: a.default,
         };
       },
-      8402: function (e, t, n) {
+      77: function (e, t, n) {
         var r =
           (this && this.__rest) ||
           function (e, t) {
@@ -1160,8 +1159,8 @@
             return n;
           };
         Object.defineProperty(t, "__esModule", { value: !0 });
-        const o = n(2303),
-          i = n(2433),
+        const o = n(8883),
+          i = n(2787),
           a = n(8013),
           s = {
             addOne: async function (e) {
@@ -1189,15 +1188,15 @@
         t.default = s;
         const u = o.mongodb.getCollection("cart");
       },
-      3309: function (e, t, n) {
+      3440: function (e, t, n) {
         var r =
           (this && this.__importDefault) ||
           function (e) {
             return e && e.__esModule ? e : { default: e };
           };
         Object.defineProperty(t, "__esModule", { value: !0 });
-        const o = r(n(7149)),
-          i = n(8655),
+        const o = r(n(8338)),
+          i = n(8486),
           a = {
             getOne: async function (e) {
               var t, n, r;
@@ -1243,7 +1242,7 @@
         }
         t.default = a;
       },
-      9176: function (e, t, n) {
+      224: function (e, t, n) {
         var r =
           (this && this.__rest) ||
           function (e, t) {
@@ -1265,7 +1264,7 @@
             return n;
           };
         Object.defineProperty(t, "__esModule", { value: !0 });
-        const o = n(2303),
+        const o = n(8883),
           i = {
             getOne: async function (e) {
               return await a, await a.findOne(e);
@@ -1281,16 +1280,16 @@
         t.default = i;
         const a = o.mongodb.getCollection("inventory");
       },
-      5734: function (e, t, n) {
+      9137: function (e, t, n) {
         var r =
           (this && this.__importDefault) ||
           function (e) {
             return e && e.__esModule ? e : { default: e };
           };
         Object.defineProperty(t, "__esModule", { value: !0 });
-        const o = r(n(7149)),
-          i = n(8655),
-          a = r(n(3309)),
+        const o = r(n(8338)),
+          i = n(8486),
+          a = r(n(3440)),
           s = {
             getOne: async function (e) {
               var t;
@@ -1342,7 +1341,7 @@
           };
         t.default = s;
       },
-      6886: function (e, t, n) {
+      9318: function (e, t, n) {
         var r =
           (this && this.__rest) ||
           function (e, t) {
@@ -1364,7 +1363,7 @@
             return n;
           };
         Object.defineProperty(t, "__esModule", { value: !0 });
-        const o = n(2303),
+        const o = n(8883),
           i = {
             getOne: async function (e) {
               return await a, await a.findOne(e);
@@ -1383,14 +1382,14 @@
         t.default = i;
         const a = o.mongodb.getCollection("item");
       },
-      6368: function (e, t, n) {
+      7157: function (e, t, n) {
         var r =
           (this && this.__importDefault) ||
           function (e) {
             return e && e.__esModule ? e : { default: e };
           };
         Object.defineProperty(t, "__esModule", { value: !0 });
-        const o = r(n(7825)),
+        const o = r(n(8001)),
           i = {
             cart: function (e) {
               if (!e || !e._id) {
@@ -1413,7 +1412,7 @@
           };
         t.default = i;
       },
-      2303: function (e, t, n) {
+      8883: function (e, t, n) {
         var r =
           (this && this.__importDefault) ||
           function (e) {
@@ -1421,14 +1420,14 @@
           };
         Object.defineProperty(t, "__esModule", { value: !0 }),
           (t.mongodb = t.sql = t.typeorm = t.knex = void 0);
-        const o = r(n(457)),
-          i = r(n(2050)),
+        const o = r(n(6513)),
+          i = r(n(5162)),
           a = new o.default();
         a.configureMongodb(i.default);
         const { knex: s, typeorm: u, sql: c, mongodb: d } = a;
         (t.knex = s), (t.typeorm = u), (t.sql = c), (t.mongodb = d);
       },
-      3660: function (e, t, n) {
+      962: function (e, t, n) {
         var r =
           (this && this.__importDefault) ||
           function (e) {
@@ -1436,8 +1435,8 @@
           };
         Object.defineProperty(t, "__esModule", { value: !0 }),
           (t.Cart = void 0);
-        const o = n(2433),
-          i = r(n(8535));
+        const o = n(2787),
+          i = r(n(9187));
         t.Cart = (e) => {
           if ((0, o.isEmpty)(e)) return null;
           const t = Object.assign({}, e),
@@ -1451,7 +1450,7 @@
           );
         };
       },
-      8655: function (e, t, n) {
+      8486: function (e, t, n) {
         var r =
           (this && this.__importDefault) ||
           function (e) {
@@ -1459,8 +1458,8 @@
           };
         Object.defineProperty(t, "__esModule", { value: !0 }),
           (t.Item = void 0);
-        const o = n(2433),
-          i = r(n(8535));
+        const o = n(2787),
+          i = r(n(9187));
         t.Item = (e) => {
           if ((0, o.isEmpty)(e)) return null;
           const t = Object.assign({}, e),
@@ -1475,7 +1474,7 @@
           );
         };
       },
-      7149: function (e, t, n) {
+      8338: function (e, t, n) {
         var r =
           (this && this.__importDefault) ||
           function (e) {
@@ -1498,7 +1497,7 @@
         t.default = o;
         const { canopyApiKey: i } = process.env;
       },
-      2050: function (e, t, n) {
+      5162: function (e, t, n) {
         var r =
           (this && this.__importDefault) ||
           function (e) {
@@ -1518,11 +1517,11 @@
         };
         t.default = a;
       },
-      1991: (e, t, n) => {
+      3161: (e, t, n) => {
         Object.defineProperty(t, "__esModule", { value: !0 }),
           (t.ValidatedQuery = void 0);
-        const r = n(182),
-          o = n(2433);
+        const r = n(777),
+          o = n(2787);
         t.ValidatedQuery = function (e) {
           return (function (e) {
             if ((0, o.isEmpty)(e)) return null;
@@ -1538,15 +1537,15 @@
           })((0, r.removeEmptyValues)(e));
         };
       },
-      7881: function (e, t, n) {
+      6290: function (e, t, n) {
         var r =
           (this && this.__importDefault) ||
           function (e) {
             return e && e.__esModule ? e : { default: e };
           };
         Object.defineProperty(t, "__esModule", { value: !0 });
-        const o = n(56),
-          i = r(n(380)),
+        const o = n(8844),
+          i = r(n(863)),
           a = {
             token: async function (e, t, n) {
               try {
@@ -1571,9 +1570,9 @@
           };
         t.default = a;
       },
-      8535: (e, t, n) => {
+      9187: (e, t, n) => {
         Object.defineProperty(t, "__esModule", { value: !0 });
-        const r = n(1991),
+        const r = n(3161),
           o = n(8013),
           i = {
             query: function (e) {
@@ -1600,44 +1599,40 @@
           };
         t.default = i;
       },
-      4727: (e, t, n) => {
-        Object.defineProperty(t, "__esModule", { value: !0 }), (t.get = void 0);
-        const r = n(56);
-        t.get = async function (e, t) {
-          try {
-            console.log("Testing get..."),
-              console.log("SUCCESS: Test complete.");
-            const n = `REQUEST: ${e}`;
-            t.status(200).send(n);
-          } catch (e) {
-            console.error("ERROR: Unable to test get.");
-            const {
-              error: n,
-              message: o,
-              code: i,
-            } = await (0, r.handleAsyncError)(e);
-            t.status(i).send(o);
-          }
-        };
+      1782: (e, t) => {
+        Object.defineProperty(t, "__esModule", { value: !0 }),
+          (t.get = void 0),
+          (t.get = function (e, t) {
+            try {
+              console.log("Testing get..."),
+                console.log("SUCCESS: Test complete.");
+              const n = `REQUEST: ${e}`;
+              t.status(200).send(n);
+            } catch (e) {
+              console.error("ERROR: Unable to test get.");
+              const { error: n, message: r, code: o } = e;
+              t.status(o).send(r);
+            }
+          });
       },
-      5156: (e, t, n) => {
+      2394: (e, t, n) => {
         Object.defineProperty(t, "__esModule", { value: !0 });
-        const r = n(7856),
-          o = n(4727);
+        const r = n(4210),
+          o = n(1782);
         t.default = { set: r.set, get: o.get };
       },
-      7856: function (e, t, n) {
+      4210: function (e, t, n) {
         var r =
           (this && this.__importDefault) ||
           function (e) {
             return e && e.__esModule ? e : { default: e };
           };
         Object.defineProperty(t, "__esModule", { value: !0 }), (t.set = void 0);
-        const o = n(3775),
-          i = n(921),
-          a = n(2553),
-          s = n(56),
-          u = r(n(6368));
+        const o = n(1209),
+          i = n(9628),
+          a = n(8042),
+          s = n(8844),
+          u = r(n(7157));
         t.set = async function (e, t) {
           try {
             console.log("Updating cart...");
@@ -1662,18 +1657,18 @@
           }
         };
       },
-      5634: function (e, t, n) {
+      5647: function (e, t, n) {
         var r =
           (this && this.__importDefault) ||
           function (e) {
             return e && e.__esModule ? e : { default: e };
           };
         Object.defineProperty(t, "__esModule", { value: !0 });
-        const o = n(3775),
-          i = n(2553),
-          a = n(56),
-          s = n(921),
-          u = r(n(6368));
+        const o = n(1209),
+          i = n(8042),
+          a = n(8844),
+          s = n(9628),
+          u = r(n(7157));
         t.default = {
           cartData: async function (e, t) {
             try {
@@ -1698,7 +1693,7 @@
           },
         };
       },
-      2062: (e, t) => {
+      3105: (e, t) => {
         Object.defineProperty(t, "__esModule", { value: !0 }),
           (t.urls = t.hostUrl = t.endpoints = void 0),
           (t.endpoints = {
@@ -1731,10 +1726,10 @@
             test: t.hostUrl + t.endpoints.test,
           });
       },
-      9701: (e, t, n) => {
+      7884: (e, t, n) => {
         Object.defineProperty(t, "__esModule", { value: !0 }),
           (t.getDbOperation = void 0);
-        const r = n(8395);
+        const r = n(9347);
         t.getDbOperation = function (e, t, n) {
           const o = r.MICROSERVICES[e];
           if (!o) throw new Error("ERROR: Invalid microservice");
@@ -1745,7 +1740,7 @@
           return a;
         };
       },
-      2669: function (e, t, n) {
+      539: function (e, t, n) {
         var r =
           (this && this.__importDefault) ||
           function (e) {
@@ -1753,8 +1748,8 @@
           };
         Object.defineProperty(t, "__esModule", { value: !0 }),
           (t.handleRoute = void 0);
-        const o = r(n(8535)),
-          i = n(9701);
+        const o = r(n(9187)),
+          i = n(7884);
         t.handleRoute = async function (e, t) {
           const { microservice: n, endpoint: r, command: a } = e.params,
             { query: s, body: u } = e,
@@ -1769,16 +1764,16 @@
           }
         };
       },
-      2099: (e, t) => {
+      5331: (e, t) => {
         Object.defineProperty(t, "__esModule", { value: !0 }),
           (t.default = function (e, t) {
             t.sendFile("index.html", { root: "public" });
           });
       },
-      4244: (e, t, n) => {
+      7299: (e, t, n) => {
         Object.defineProperty(t, "__esModule", { value: !0 });
-        const r = n(2553),
-          o = n(4321);
+        const r = n(8042),
+          o = n(2324);
         t.default = {
           cartData: async function (e, t) {
             try {
@@ -1801,7 +1796,7 @@
           },
         };
       },
-      8823: function (e, t, n) {
+      6919: function (e, t, n) {
         var r =
           (this && this.__importDefault) ||
           function (e) {
@@ -1809,20 +1804,20 @@
           };
         Object.defineProperty(t, "__esModule", { value: !0 });
         const o = r(n(6860)),
-          i = r(n(2099)),
-          a = n(5271),
-          s = r(n(4244)),
-          u = r(n(5634)),
-          c = r(n(3986)),
-          d = r(n(155)),
-          l = r(n(6270)),
-          f = r(n(6416)),
-          p = r(n(7881)),
-          y = r(n(3585)),
-          h = n(2062),
-          m = n(2669),
+          i = r(n(5331)),
+          a = n(4222),
+          s = r(n(7299)),
+          u = r(n(5647)),
+          c = r(n(3735)),
+          d = r(n(1858)),
+          l = r(n(346)),
+          f = r(n(9200)),
+          p = r(n(6290)),
+          y = r(n(5772)),
+          h = n(3105),
+          m = n(539),
           _ = r(n(5142)),
-          g = r(n(5156));
+          g = r(n(2394));
         _.default.config();
         const w = o.default.Router();
         w.post(
@@ -1854,7 +1849,7 @@
           w.delete(h.endpoints.dynamic, m.handleRoute),
           (t.default = w);
       },
-      5271: function (e, t, n) {
+      4222: function (e, t, n) {
         var r =
           (this && this.__importDefault) ||
           function (e) {
@@ -1872,10 +1867,10 @@
             t.send(n);
           });
       },
-      3775: (e, t, n) => {
+      1209: (e, t, n) => {
         Object.defineProperty(t, "__esModule", { value: !0 }),
           (t.toUsedProperties = t.getValidValues = void 0);
-        const r = n(2433);
+        const r = n(2787);
         function o(e) {
           return function (t = {}, n, r, o) {
             return void 0 === n || n < 0 || (e.includes(r) && (t[r] = n)), t;
@@ -1895,20 +1890,20 @@
         }),
           (t.toUsedProperties = o);
       },
-      1026: (e, t, n) => {
+      1741: (e, t, n) => {
         Object.defineProperty(t, "__esModule", { value: !0 });
-        const r = n(820),
-          o = n(3051),
-          i = n(6031),
-          a = n(8112),
-          s = n(6162),
-          u = n(7320),
-          c = n(8716),
-          d = n(8639),
-          l = n(5320),
-          f = n(2648),
-          p = n(3804),
-          y = n(1962);
+        const r = n(5661),
+          o = n(6902),
+          i = n(6857),
+          a = n(823),
+          s = n(400),
+          u = n(3380),
+          c = n(6012),
+          d = n(3615),
+          l = n(7080),
+          f = n(3376),
+          p = n(5110),
+          y = n(4504);
         t.default = class {
           constructor() {
             (this.configureKnex = r.configureKnex.bind(this)),
@@ -1926,7 +1921,7 @@
           }
         };
       },
-      820: function (e, t, n) {
+      5661: function (e, t, n) {
         var r =
           (this && this.__importDefault) ||
           function (e) {
@@ -1941,7 +1936,7 @@
           this.knex = t;
         };
       },
-      3051: function (e, t, n) {
+      6902: function (e, t, n) {
         var r =
           (this && this.__importDefault) ||
           function (e) {
@@ -1959,7 +1954,7 @@
           this.mysql = t;
         };
       },
-      6162: (e, t) => {
+      400: (e, t) => {
         Object.defineProperty(t, "__esModule", { value: !0 }),
           (t.configureSqlKnex = void 0),
           (t.configureSqlKnex = function () {
@@ -1967,7 +1962,7 @@
             this.sql = this.sqlKnex.bind(this);
           });
       },
-      7320: (e, t) => {
+      3380: (e, t) => {
         Object.defineProperty(t, "__esModule", { value: !0 }),
           (t.configureSqlMysql = void 0),
           (t.configureSqlMysql = function () {
@@ -1976,7 +1971,7 @@
             this.sql = this.sqlMysql.bind(this);
           });
       },
-      8716: (e, t) => {
+      6012: (e, t) => {
         Object.defineProperty(t, "__esModule", { value: !0 }),
           (t.configureSqlTypeorm = void 0),
           (t.configureSqlTypeorm = function () {
@@ -1988,7 +1983,7 @@
               }.bind(this));
           });
       },
-      8112: function (e, t, n) {
+      823: function (e, t, n) {
         var r =
           (this && this.__importDefault) ||
           function (e) {
@@ -2004,7 +1999,7 @@
           (this.sqlite = new o.default(e + "/" + t)), (this.sqlite.cwd = e);
         };
       },
-      6031: (e, t) => {
+      6857: (e, t) => {
         Object.defineProperty(t, "__esModule", { value: !0 }),
           (t.configureTypeorm = void 0),
           (t.configureTypeorm = function (e) {
@@ -2018,21 +2013,21 @@
               }.bind(this));
           });
       },
-      8639: (e, t) => {
+      3615: (e, t) => {
         Object.defineProperty(t, "__esModule", { value: !0 }),
           (t.sqlKnex = void 0),
           (t.sqlKnex = async function (e, t) {
             return (await this.knex.raw(e, t))[0];
           });
       },
-      1962: (e, t) => {
+      4504: (e, t) => {
         Object.defineProperty(t, "__esModule", { value: !0 }),
           (t.sqlMysql = void 0),
           (t.sqlMysql = async function (e, t) {
             return this.mysql.raw(e, t);
           });
       },
-      2648: (e, t) => {
+      3376: (e, t) => {
         Object.defineProperty(t, "__esModule", { value: !0 }),
           (t.sqlSqlite = void 0),
           (t.sqlSqlite = async function (e, t = "") {
@@ -2040,7 +2035,7 @@
             return console.log(t, "\n", n, "\n"), n;
           });
       },
-      3804: function (e, t, n) {
+      5110: function (e, t, n) {
         var r =
           (this && this.__importDefault) ||
           function (e) {
@@ -2055,22 +2050,22 @@
           this.sqlite.exec(n.toString());
         };
       },
-      5320: (e, t) => {
+      7080: (e, t) => {
         Object.defineProperty(t, "__esModule", { value: !0 }),
           (t.sqlTypeorm = void 0),
           (t.sqlTypeorm = async function (e, t) {
             return await this.typeorm.query(e, t);
           });
       },
-      457: function (e, t, n) {
+      6513: function (e, t, n) {
         var r =
           (this && this.__importDefault) ||
           function (e) {
             return e && e.__esModule ? e : { default: e };
           };
         Object.defineProperty(t, "__esModule", { value: !0 });
-        const o = r(n(1026)),
-          i = n(8739);
+        const o = r(n(1741)),
+          i = n(3978);
         class a extends o.default {
           constructor() {
             super(...arguments),
@@ -2079,12 +2074,12 @@
         }
         t.default = a;
       },
-      8739: (e, t, n) => {
+      3978: (e, t, n) => {
         Object.defineProperty(t, "__esModule", { value: !0 }),
           (t.configureMongodb = void 0);
-        const r = n(1392),
+        const r = n(4095),
           o = n(8013),
-          i = n(8347);
+          i = n(6959);
         t.configureMongodb = function ({ connectionString: e, database: t }) {
           const { protocol: n, port: a } = new URL(e);
           (e =
@@ -2115,7 +2110,7 @@
               ));
         };
       },
-      56: function (e, t, n) {
+      8844: function (e, t, n) {
         var r =
           (this && this.__importDefault) ||
           function (e) {
@@ -2123,7 +2118,7 @@
           };
         Object.defineProperty(t, "__esModule", { value: !0 }),
           (t.handleAsyncError = void 0);
-        const o = r(n(7825));
+        const o = r(n(8001));
         t.handleAsyncError = async function (e) {
           const t = await e,
             n = t.message;
@@ -2135,7 +2130,7 @@
           );
         };
       },
-      497: (e, t) => {
+      5998: (e, t) => {
         Object.defineProperty(t, "__esModule", { value: !0 }),
           (t.floorOf = void 0),
           (t.floorOf = function (e, t = 0) {
@@ -2147,7 +2142,7 @@
             return Math.trunc(e);
           });
       },
-      1392: (e, t) => {
+      4095: (e, t) => {
         Object.defineProperty(t, "__esModule", { value: !0 }),
           (t.PromiseExtends = void 0),
           (t.PromiseExtends = function (e) {
@@ -2163,7 +2158,7 @@
             return t;
           });
       },
-      8347: function (e, t, n) {
+      6959: function (e, t, n) {
         var r =
           (this && this.__importDefault) ||
           function (e) {
@@ -2176,10 +2171,10 @@
           return o.default.existsSync("/.dockerenv");
         };
       },
-      950: (e, t, n) => {
+      7440: (e, t, n) => {
         Object.defineProperty(t, "__esModule", { value: !0 }),
           (t.PositiveInteger = t.Integer = void 0);
-        const r = n(497);
+        const r = n(5998);
         (t.Integer = function (e) {
           return (0, r.floorOf)(e);
         }),
@@ -2188,7 +2183,7 @@
             return (0, t.Integer)(e);
           });
       },
-      7825: (e, t) => {
+      8001: (e, t) => {
         Object.defineProperty(t, "__esModule", { value: !0 }),
           (t.default = {
             success: { created: 201, general: 200, ok: 200 },
@@ -2206,7 +2201,7 @@
             redirect: { general: 300 },
           });
       },
-      9577: function (e, t, n) {
+      218: function (e, t, n) {
         var r =
           (this && this.__importDefault) ||
           function (e) {
@@ -2223,10 +2218,10 @@
           }
         };
       },
-      182: (e, t, n) => {
+      777: (e, t, n) => {
         Object.defineProperty(t, "__esModule", { value: !0 }),
           (t.removeEmptyValues = void 0);
-        const r = n(2433);
+        const r = n(2787);
         t.removeEmptyValues = function (e) {
           if ((0, r.isEmpty)(e)) return null;
           let t = null;
@@ -2237,24 +2232,24 @@
           return t;
         };
       },
-      6935: (e, t, n) => {
+      8719: (e, t, n) => {
         Object.defineProperty(t, "__esModule", { value: !0 }),
           (t.getHost = void 0);
-        const r = n(8347);
+        const r = n(6959);
         t.getHost = function (e = "localhost") {
           return (0, r.isDockerEnvironment)()
             ? "0.0.0.0"
             : process.env.host || e;
         };
       },
-      2636: (e, t) => {
+      4275: (e, t) => {
         Object.defineProperty(t, "__esModule", { value: !0 }),
           (t.getPort = void 0),
           (t.getPort = function (e = 8e3) {
             return Number(process.env.PORT) || e;
           });
       },
-      8240: (e, t) => {
+      516: (e, t) => {
         Object.defineProperty(t, "__esModule", { value: !0 }),
           (t.isServerless = void 0),
           (t.isServerless = function () {
@@ -2266,7 +2261,7 @@
             );
           });
       },
-      2433: function (e, t, n) {
+      2787: function (e, t, n) {
         var r =
           (this && this.__importDefault) ||
           function (e) {
@@ -2685,7 +2680,7 @@
       if (void 0 !== o) return o.exports;
       var i = (t[r] = { exports: {} });
       return e[r].call(i.exports, i, i.exports, n), i.exports;
-    })(9124),
+    })(6083),
     r = exports;
   for (var o in n) r[o] = n[o];
   n.__esModule && Object.defineProperty(r, "__esModule", { value: !0 });
