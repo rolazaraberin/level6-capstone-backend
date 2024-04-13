@@ -18,6 +18,7 @@
     "seed": "npm run mongo-seeds",
     "remove": "npm run claudia-delete",
     "rollback": "npm run knex-rollback && npm run typeorm-rollback",
+    "sync": "npm run github-pull main",
     "transpile-build": "npm run transpile && npm run build",
     "dev-test": "jest --runInBand --config jest.config.development.ts --detectOpenHandles",
     "dev-test2": "jest --runInBand --config jest.config.development.ts --detectOpenHandles ./src/controllers/inventoryUtils.test.ts",
